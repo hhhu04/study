@@ -42,8 +42,6 @@ if(num == 0)
 $(function(){
 $('#add').on('click', function(e) {
 
-alert("logout");
-
 $(location).attr('href','/login/logout.jsp');
 });
 });

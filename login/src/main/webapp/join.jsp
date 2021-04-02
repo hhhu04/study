@@ -13,6 +13,18 @@
 </head>
 <body>
 
+<script>
+<%
+Cookie[] cookies = request.getCookies();
+int n = 0;
+for(Cookie cookie : cookies) if(cookie.getName().equals("email")) n++;
+if(n > 0){
+%>
+location.href = "/login/main.jsp";
+//$(location).attr('href','/login/main.jsp');
+<%}%>
+
+</script>
 
 <div class="box1">
 <h3>회원가입</h3>
@@ -21,6 +33,7 @@
 <input type="password" name="pass" id="pass" placeholder="비밀번호 입력">
 <input type="button" id="add" name="add" value="가입">
 </form>
+<br>
 <button class="btn btn-primary" onclick="location.href='index.jsp'">뒤로</button>
 </div>
 
@@ -38,6 +51,7 @@ $(function(){
         	data : str,
         	dataType : 'text',
         	success : function(data){
+        		console.log(data);
 				if($.trim(data) == em) alert(data+" 는 이미 존재하는 계정입니다!");
 				else { $(location).attr('href','/login/login.jsp');}
         		

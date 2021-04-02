@@ -11,6 +11,20 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<script>
+<%
+Cookie[] cookies = request.getCookies();
+int n = 0;
+for(Cookie cookie : cookies) if(cookie.getName().equals("email")) n++;
+if(n > 0){
+%>
+location.href = "/login/main.jsp";
+//$(location).attr('href','/login/main.jsp');
+<%}%>
+
+</script>
+
 <div class="box1">
 <h2>기본 페이지</h2>
 <p><button class="btn btn-primary" onclick="location.href='login.jsp'">로그인</button> <button class="btn btn-primary" onclick="location.href='join.jsp'">회원가입</button></p>

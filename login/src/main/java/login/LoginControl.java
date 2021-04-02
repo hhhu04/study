@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import join.Connect;
+
 /**
  * Servlet implementation class LoginControl
  */
@@ -17,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	
+	Connect connect = new Connect();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -49,19 +51,20 @@ public class LoginControl extends HttpServlet {
 		String pass = request.getParameter("pass");
 		System.out.println(email+" " +pass+"   123123");
 		
-		String[] checkID = Connect.findID(email, pass);
+		String checkID = Connect.findID(email, pass);
 		
-		String id = checkID[0];
-		
-		if(checkID[0] != null && checkID[1] != null) {
+		if(checkID != null) {
 		Cookie cookie = new Cookie("email",email);
 		response.addCookie(cookie);
-		writer.print(id);
+		writer.print(checkID);
 		}
 		
 		else {
 			writer.println(" your email or password check");
 		}
+		
+		writer.flush();
+		writer.close();
 		
 		doGet(request, response);
 	}

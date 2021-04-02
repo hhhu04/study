@@ -11,7 +11,7 @@ public class Connect {
 		// TODO Auto-generated method stub
 	}
 	
-	public static String[] findID(String id, String pass)  {
+	public static String findID(String id, String pass)  {
 		
 		PreparedStatement pstmt = null;
 		Connection conn = null;
@@ -32,22 +32,17 @@ public class Connect {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			System.out.println(sql);
-			String[] arr=new String[2];
 			
 			if(rs.next()) {
 				String email = rs.getString("user_id");
 				String pa = rs.getString("password");
-				arr[0] = email;
-				arr[1] = pa;
 				System.out.println(email);
 				System.out.println(pa);
-				return arr;
+				return email;
 			}
 			else {
 				System.out.println("아디없음");
-				arr[0] = null;
-				arr[1] = null;
-				return arr;
+				return "0";
 			}
 		
 			

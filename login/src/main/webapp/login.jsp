@@ -13,6 +13,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
+
 <div class = "box1">
 <h3>로그인 페이지</h3>
 <form id="logForm" method="GET">
@@ -24,15 +27,18 @@
 <p><button class="btn btn-primary" onclick="location.href='join.jsp'">회원가입</button>&#32;&#32;<button class="btn btn-primary" onclick="location.href='index.jsp'">뒤로</button></p>
 </div>
 
+<script>
 <%
 Cookie[] cookies = request.getCookies();
-String mail,pw;
-int num = 0;
-for(Cookie cookie : cookies)
-{
-	if(cookie.getName().equals("email")) mail = cookie.getName();
-}
+int n = 0;
+for(Cookie cookie : cookies) if(cookie.getName().equals("email")) n++;
+if(n > 0){
 %>
+location.href = "/login/main.jsp";
+//$(location).attr('href','/login/main.jsp');
+<%}%>
+
+</script>
  
 
 <script>
@@ -48,7 +54,8 @@ $(function(){
         	dataType : 'text',
         	success : function(data){
         			console.log(data);
-        			$(location).attr('href','/login/main.jsp');
+        			if($.trim(data) == em)$(location).attr('href','/login/main.jsp');
+        			else alert("입력 값 확인");
         	},
         		error:function(data){
         			console.log(data);
