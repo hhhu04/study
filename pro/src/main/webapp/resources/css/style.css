@@ -1,0 +1,510 @@
+/*----------*/
+/*  기본    */
+/*----------*/
+body{
+    background-color: white;
+    color: black;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 15px;
+    
+    
+}
+
+p {
+    color: blue;
+}
+
+table{
+    color: black;
+}
+
+section{
+    padding-bottom: 7%;
+}
+
+
+
+/*----------*/
+/*  헤더    */
+/*----------*/
+nav{
+    font-size: 15px;
+    background-color: black;
+}
+
+.main-logo{
+    width: 250px;
+    padding: 10px;
+}
+
+.head-nav{
+    display: flex;
+    justify-content: space-between;
+    color: rgb(223, 211, 211);
+
+}
+
+.main-nav{
+    text-align: center;
+}
+
+
+.main-nav2{
+    text-align: right;
+    padding-right: 5px;
+}
+
+
+
+.main-nav li,
+.main-nav2 li {
+    display: inline;
+}
+
+.main-nav li a:link,
+.main-nav li a:visited{
+    padding: 24px 0px;
+    text-decoration: none;
+    color:#b2c0cc;
+}
+
+.main-nav2 li a:link,
+.main-nav2 li a:visited{
+    padding: 24px 0px;
+    text-decoration: none;
+    color:#b2c0cc;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active{
+    color: white;
+}
+
+.main-nav2 li a:hover,
+.main-nav2 li a:active{
+    color: white;
+}
+
+/*----------*/
+/*  윗부분    */
+/*----------*/
+
+.section-top{
+    background-color: black;
+    width: 100%;
+    padding-left: 5%;
+}
+
+.top-img {
+    width: 500px;
+}
+
+.top-text{
+    text-align: left;
+    padding-top: 50px;
+    padding-left: 30%;
+    color: white;
+}
+
+.top-btn{
+    background-color: #0078ff;
+    color: white;
+    border: 0px;
+    margin-top: 10px;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+
+/*----------*/
+/*  sec2    */
+/*----------*/
+
+.sec2{
+    padding-top: 10%;
+    padding-left: 3%;
+}
+
+.top {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.top-p{
+    color: black;
+}
+
+.sec2-img{
+    width: 500px;
+    height: 300px;
+    
+}
+
+.top-iteam{
+    border:1px solid rgb(177, 172, 172);
+    border-radius: 5px;
+
+}
+
+.top-title{
+    display: inline-flex
+}
+
+.sec2-btn{
+    background-color: white;
+    color: rgb(103, 103, 218);
+    border-color: rgb(81, 81, 197);
+    border-radius: 5px;
+}
+
+.sec2-p{
+    padding-left: 16%;
+}
+
+.black{
+    color: black;
+    font-size: 20px;
+    font-weight: 100;
+}
+/*----------*/
+/*  sec3    */
+/*----------*/
+
+.sec3-div{
+    padding-left: 18%;
+    padding-right: 20%;
+    color: black;
+
+}
+
+.sec3-btn{
+    background-color: white;
+    color: #0078ff;
+    border-color: #0078ff;
+    border-radius: 3px;
+}
+
+.sec-ul-in{
+    padding-bottom: 1%;
+}
+
+.sec3-ul{
+    padding-left: 0%;
+    
+}
+.sec3-ul li:hover{
+    background-color: #0089ff;
+}
+
+.sec3-ul li{
+    display: inline;
+    background-color: #eeebff;
+    color: rgb(103, 103, 218);
+    border-radius: 5px;
+    border:none
+    
+}
+
+.li-btn{
+    background-color: #eeebff;
+    color: #0078ff;
+    border-radius: 5px;
+    border-color: white;
+}
+
+.job-item{
+    padding-left: 17%;
+    padding-right: 20%;
+}
+
+
+
+.select {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-left: 17%;
+    padding-right: 20%;
+    
+}
+
+.sel-img img{
+    width: 80px;
+    height: 80px;
+}
+
+.iteam{
+    display: inline-flex;
+    flex: 1 1 40%;
+    margin: 0px 0px 16px 16px;
+    padding: 16px;
+    border:1px solid rgb(177, 172, 172);
+}
+
+
+.sel-ul li{
+    display: inline;
+    background-color: rgb(206, 198, 198);
+    border-radius: 3px;
+}
+
+.in-top{
+    font-size: 20px;
+}
+
+.in-top:hover,
+.in-top :active{
+    color:#0078ff;
+    border-bottom:2px solid #0078ff;
+    width: 35%;
+}
+
+.in-center{
+    font-size: 10px;
+}
+.in-bottom{
+    font-size: 10px;
+}
+
+/*----------*/
+/*  sec4    */
+/*----------*/
+
+.sec4{
+    background-color: #f4f4f8;
+    height: 65px;
+}
+
+.sec4-top{
+    margin-left: 20%;
+    width: 25%px;
+    float: right;
+}
+
+.sec4-art{
+    padding-left: 4.5%;
+    padding-top: 0.5%;
+    height: 300px;
+    align-content: center;
+    
+}
+
+.sec4-img{
+    width: 80px;
+}
+
+.sec4-last{
+    float: right;
+    margin-top: 15%;
+}
+
+.sec4-btn{
+    background-color: #0078ff;
+    color: #ffffff;
+    border-radius: 5px;
+    width: 150px;
+    height: 40px;
+}
+
+/*----------*/
+/*  sec5   */
+/*----------*/
+
+.right-img{
+    max-height: 160;
+    max-width: 270px;
+
+}
+
+.right-img2{
+    max-height: 160;
+    max-width: 270px;
+
+}
+
+.banner-in{
+    padding-right: 20%;
+    padding-left: 17%;
+}
+.padding {
+    display: flex;
+    justify-content: center;
+    background-color: #160f65;
+    border-radius: 5px;
+}
+
+.bincan{
+    padding-right: 20%;
+    padding-left: 20%;
+}
+
+.left{
+    padding-left: 30px;
+    color: white;
+}
+
+.right{
+    padding-right: 10%;
+}
+
+
+.sec5 {
+    padding-top: 8%;
+}
+
+.sec5-ul li:hover{
+    background-color: #0078ff0d;
+}
+
+.sec5 p {
+    color: #4f6b81;
+}
+
+.sec5-hover:hover,
+.sec-hover:active{
+    border-bottom: 2px solid white;
+}
+
+.sec5-hover{
+    width: 200%;
+}
+
+/*----------*/
+/*  sec5.5    */
+/*----------*/
+
+.large-header{
+    margin: 0px 0px 80px;
+    text-align: center;
+}
+
+.span{
+    margin: 0px 2px;
+    width: 10px;
+}
+.root{
+    margin: 0px 2px;
+    
+}   
+
+
+
+.blue{
+    color: blue;
+}
+
+.sec5-p{
+    color: black;
+}
+
+.sec55-img{
+    width: 542px;
+    height: 593px;
+}
+
+.sec5-ul li{
+    padding: 3%;
+    
+}
+
+.sec5-ul{
+    padding-left: 5rem;
+    list-style: none;
+}
+
+.our{
+    padding-left: 12%;
+    padding-right: 10%;
+}
+
+.h-in{
+    color: white;
+    background-color: gray;
+    border-radius: 3px;
+}
+
+
+/*----------*/
+/*  sec6    */
+/*----------*/
+
+.list li{
+    border:1px solid rgb(177, 172, 172);
+    border-bottom: none;
+    float: left;
+    margin: -1px 0px 0px;
+    width: 193px;
+    height: 74px;
+    padding-top: 30px;
+}
+.list ul{
+    list-style: none;
+}
+
+.list img{
+    width: 160px;
+    height: 40px;
+    align-content: center;
+    margin: center;
+}
+
+.list{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding-left: 15%;
+    padding-right: 10%;
+    overflow:hidden
+}
+
+
+
+/*----------*/
+/*  sec7    */
+/*----------*/
+
+.sec7{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding-left: 3%;
+    padding-right: 3%;
+    align-items: center;
+    background-color: #263747;
+    color: white;
+}
+
+
+.sec7-btn{
+    width: 90px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #0078ff;
+    border-color: #0078ff;
+    color: white;
+}
+
+
+/*----------*/
+/*  footer   */
+/*----------*/
+
+footer{
+    padding-left: 5%;
+    padding-bottom: 4%;
+    font-size: 13px;
+    color: rgb(167, 161, 161);
+    padding-top: -70%;
+    
+}
+
+.fot-h{
+    color: black;
+}
+
+
+/*----------*/
+/*  윗부분    */
+/*----------*/
