@@ -1,0 +1,6 @@
+remaining 30
+defult 2000
+day 20000
+week 50000
+month 150000
+month3 300000
