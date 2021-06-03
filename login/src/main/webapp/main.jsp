@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.TreeMap" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +16,13 @@
 <script>
 <%
 Cookie[] coo = request.getCookies();
+TreeMap<String,String> map = new TreeMap<>();
 int num = 0;
 for(Cookie cookie: coo){
-	if(cookie.getName().equals("email")) num++;
+	if(cookie.getName().equals("email")) {
+		map.put(cookie.getName(),cookie.getValue());
+		num++;
+	}
 }
 
 if(num == 0)
@@ -28,13 +33,12 @@ if(num == 0)
 	<%
 }
 
-
 %>
 
 
 </script>
 <div class = "box1">
-<p>Hello World</p>
+<p>Hello <%= map.get("email") %></p>
 <button class="btn btn-primary" id="add" name="add">로그아웃</button>
 </div>
 

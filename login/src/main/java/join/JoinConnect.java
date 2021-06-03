@@ -2,12 +2,13 @@ package join;
 
 import java.sql.*;
 
-public class Connect {
+public class JoinConnect {
 	
 	public static void main(String[] args) {
+		createID("asdafsa","1321213");
 	}
 	
-	public static String findID(String id, String pass) {
+	public static String checkID(String id, String pass) {
 		
 		PreparedStatement pstmt = null;
 		Connection conn = null;
@@ -29,7 +30,7 @@ public class Connect {
 			
 			if(rs.next()) {
 				String email = rs.getString("user_id");
-				System.out.println(email);
+				System.out.println(email+"1111");
 				return email;
 			}
 			else {

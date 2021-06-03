@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class Connect {
+public class LoginConnect {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -26,17 +26,17 @@ public class Connect {
 			conn = DriverManager.getConnection(url, user, password);
 			
 			String sql ="select user_id,password "
-					+ "from user where user.user_id ='"+id+"'"
-							+ "and user.password = '"+pass+"';" ;
+					  + "from user where user.user_id ='"+id+"'"
+					  + "and user.password = '"+pass+"';" ;
 			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			System.out.println(sql);
+			System.out.println(sql+"000");
 			
 			if(rs.next()) {
 				String email = rs.getString("user_id");
 				String pa = rs.getString("password");
-				System.out.println(email);
+				System.out.println(email+"123");
 				System.out.println(pa);
 				return email;
 			}

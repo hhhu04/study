@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 public class JoinControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	Connect connect = new Connect();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,7 +30,6 @@ public class JoinControl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -44,8 +42,11 @@ public class JoinControl extends HttpServlet {
 		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
-		System.out.println(email+" " +pass);
-		String id = connect.findID(email, pass);
+		System.out.println(pass);
+		
+		System.out.println("가입서블릿");
+		
+		String id = JoinConnect.checkID(email, pass);
 		
 		if(id.equals(email)) {
 		writer.print(id);
@@ -58,7 +59,6 @@ public class JoinControl extends HttpServlet {
 		writer.flush();
 		writer.close();
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		
 		

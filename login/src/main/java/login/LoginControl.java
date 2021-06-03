@@ -19,7 +19,6 @@ import join.Connect;
 public class LoginControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	Connect connect = new Connect();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,7 +32,10 @@ public class LoginControl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String email = request.getParameter("email");
+		String pass = request.getParameter("pass");
 		
+		System.out.println("로그인서블릿");
 		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -49,11 +51,12 @@ public class LoginControl extends HttpServlet {
 		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
-		System.out.println(email+" " +pass+"   123123");
 		
-		String checkID = Connect.findID(email, pass);
+		System.out.println("로그인서블릿");
 		
-		if(checkID != null) {
+		String checkID = LoginConnect.findID(email, pass);
+		
+		if(checkID.equals(email)) {
 		Cookie cookie = new Cookie("email",email);
 		response.addCookie(cookie);
 		writer.print(checkID);
