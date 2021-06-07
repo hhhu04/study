@@ -11,4 +11,6 @@ public interface ParkLogsRepository extends JpaRepository<ParkLogs,Long> {
 
     List<ParkLogs> findByMemberIdOrderByIdDesc(Long id);
 
+
+
 }
