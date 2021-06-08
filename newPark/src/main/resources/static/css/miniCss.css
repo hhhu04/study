@@ -23,3 +23,21 @@
 	display: inline;
 }
 
+td{
+	padding: 10px;
+}
+.list_list {
+	list-style : none;
+	text-align:center;
+}
+
+.tb {
+	padding-left: 20%;
+}
+
+.tb {
+	padding: 5%;
+	padding: 15px;
+	margin: auto;
+
+}

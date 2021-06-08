@@ -16,5 +16,4 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
     List<Member> findMemberByMemberGrade(String grade);
 
 
-
 }

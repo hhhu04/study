@@ -70,12 +70,19 @@ public class PaymentController {
 
     @PostMapping("payment/payment")
     @ResponseBody
-    public int paymentStart(@RequestBody Card card, @CookieValue(value="carNumber", required=false) Cookie cookie,PaymentLogs paymentLogs,Member member){
+    public int paymentStart(@RequestBody Card card, @CookieValue(value="carNumber", required=false) Cookie cookie,PaymentLogs paymentLogs,Member member,
+                                HttpServletRequest request,HttpServletResponse response){
         try {
             member.setCarNumber(cookie.getValue());
             member = memberService.findCar(member);
             int num = paymentService.createPaymentLog(member, paymentLogs,card);
             memberService.update(member);
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+
+            HttpSession session = request.getSession();
+            session.invalidate();
+
             return num;
         }catch (Exception e){
             e.printStackTrace();
