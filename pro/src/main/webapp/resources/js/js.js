@@ -1,3 +1,0 @@
-new Swiper( '.swiper-container' );
-
-
