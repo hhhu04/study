@@ -2,7 +2,7 @@
 
 구버전 사용 언어 - java/jsp , mysql, jdbc, tomcat9.0 ,javascript
 
-newPark 사용 언어 - java, spring boot, mysql, jsp, thymeleaf, javascript, html
+newPark 사용 언어 - java, spring boot, mysql, jp, thymeleaf, javascript, html
 
 
 db명세사항
