@@ -14,4 +14,9 @@ public interface ManagerRepositor extends JpaRepository<Manager,Long> {
     Manager findDistinctByManagerIdAndPassword(String id,String password);
 
     List<Manager> findAll();
+
+    boolean existsManagerByName(String name);
+
+    Manager findManagerByName(String name);
+
 }
