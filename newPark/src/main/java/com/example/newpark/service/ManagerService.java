@@ -28,6 +28,8 @@ public class ManagerService {
     }
 
 
+
+
     public List<Manager> findAll() throws Exception{
         List<Manager> list;
         list = managerRepositor.findAll();

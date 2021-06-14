@@ -14,12 +14,14 @@
   <br><br><br>
   <h3>관리자 페이지 입니다.</h3>
   <form id="maform" method="post">
-    <input type="text" id="id" name="id" placeholder="관리자 ID">
-    <input type="password" id="pass" name="pass" placeholder="관리자 pw">
+    <input type="text" id="id" name="id" placeholder="사장 ID">
+    <input type="password" id="pass" name="pass" placeholder="사장 pw">
     <input type="button" id="add" value="로그인">
     <input type="button" id ="main" value="취소">
   </form>
-
+  <form action="/auth/kakao">
+  <input type="submit" id="manager" value="직원로그인">
+  </form>
 </div>
 
 <script>
@@ -62,6 +64,8 @@
 
 
 </script>
+
+
 
 
 </body>
