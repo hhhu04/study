@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script th:inline="javascript">
+    var id=[[${session['id']}]];
+    console.log(id);
+    // if(car == null) $(location).attr('href','/');
+
+</script>
+메인
+<form action="/auth/kakao"><input type="submit" value="카카오"></form>
+<form action="/auth/google"><input type="submit" value="구글"></form><br>
+<form action="/auth/out"><input type="submit" value="로그아웃"></form>
+
+</body>
+</html>

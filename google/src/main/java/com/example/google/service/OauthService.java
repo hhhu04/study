@@ -17,6 +17,7 @@ public class OauthService {
 
     private final List<SocialOauth> socialOauthList;
     private final HttpServletResponse response;
+    private final KakaoOauth kakaoOauth;
 
     public void request(SocialLoginType socialLoginType) {
         SocialOauth socialOauth = this.findSocialOauthByType(socialLoginType);
@@ -30,6 +31,7 @@ public class OauthService {
 
     public String requestAccessToken(SocialLoginType socialLoginType, String code) {
         SocialOauth socialOauth = this.findSocialOauthByType(socialLoginType);
+
         return socialOauth.requestAccessToken(code);
     }
 
@@ -39,6 +41,18 @@ public class OauthService {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("알 수 없는 SocialLoginType 입니다."));
     }
+
+    public void kakaoLogout(){
+
+        try {
+            response.sendRedirect("https://kauth.kakao.com/oauth/logout?client_id=b4dad0c3fd74414e64580f182c1e5df9&logout_redirect_uri=http://localhost:8080/auth/logout");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        kakaoOauth.logout();
+    }
+
+
 
 //    private final GoogleOauth googleOauth;
 //    private final KakaoOauth kakaoOauth;

@@ -2,9 +2,12 @@ package com.example.google.controller;
 
 import com.example.google.domain.SocialLoginType;
 import com.example.google.service.OauthService;
+import com.example.google.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @CrossOrigin
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class OauthController {
     private final OauthService oauthService;
+    private final UserService userService;
 
     /**
      * 사용자로부터 SNS 로그인 요청을 Social Login Type 을 받아 처리
@@ -35,12 +39,26 @@ public class OauthController {
     @GetMapping(value = "/{socialLoginType}/callback")
     public String callback(
             @PathVariable(name = "socialLoginType") SocialLoginType socialLoginType,
-            @RequestParam(name = "code") String code) {
+            @RequestParam(name = "code") String code, HttpServletRequest request) {
         log.info(">> 소셜 로그인 API 서버로부터 받은 code :: {}", code);
-        return oauthService.requestAccessToken(socialLoginType, code);
+        String email = oauthService.requestAccessToken(socialLoginType, code);
+
+        if(userService.check(email)) {
+            userService.login(email,request);
+            return "<script>alert('로그인');  window.location = 'http://localhost:8080/main'</script>";
+        }
+        else {
+            userService.join(email);
+            return "<script>alert('가입진행'); window.location = 'http://localhost:8080/main'</script>";
+        }
+
     }
 
+    @GetMapping("out")
+    public void out(){
+        oauthService.kakaoLogout();
 
+    }
 
 
 
