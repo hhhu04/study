@@ -12,8 +12,9 @@
 
 </script>
 메인
+<div th:if="${session.id}==null">
 <form action="/auth/kakao"><input type="submit" value="카카오"></form>
-<form action="/auth/google"><input type="submit" value="구글"></form><br>
+    <form action="/auth/google"><input type="submit" value="구글"></form><br></div>
 <form action="/auth/out"><input type="submit" value="로그아웃"></form>
 
 </body>

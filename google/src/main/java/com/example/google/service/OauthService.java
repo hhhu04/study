@@ -1,9 +1,6 @@
 package com.example.google.service;
 
-import com.example.google.domain.GoogleOauth;
 import com.example.google.domain.KakaoOauth;
-import com.example.google.domain.SocialLoginType;
-import com.example.google.domain.SocialOauth;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +12,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OauthService {
 
-    private final List<SocialOauth> socialOauthList;
     private final HttpServletResponse response;
     private final KakaoOauth kakaoOauth;
+    private final KakaoOauth googleOauth;
 
-    public void request(SocialLoginType socialLoginType) {
-        SocialOauth socialOauth = this.findSocialOauthByType(socialLoginType);
-        String redirectURL = socialOauth.getOauthRedirectURL();
+    public void request(String socialLoginType) {
+        String redirectURL;
+        if(socialLoginType.equals("google")) redirectURL = googleOauth.getOauthRedirectURL();
+        else redirectURL = kakaoOauth.getOauthRedirectURL();
         try {
             response.sendRedirect(redirectURL);
         } catch (IOException e) {
@@ -29,18 +27,15 @@ public class OauthService {
         }
     }
 
-    public String requestAccessToken(SocialLoginType socialLoginType, String code) {
-        SocialOauth socialOauth = this.findSocialOauthByType(socialLoginType);
+    public String requestAccessToken(String socialLoginType, String code) {
 
-        return socialOauth.requestAccessToken(code);
+        if(socialLoginType.equals("google")) return googleOauth.requestAccessToken(code);
+        else {
+            return kakaoOauth.requestAccessToken(code);
+        }
     }
 
-    private SocialOauth findSocialOauthByType(SocialLoginType socialLoginType) {
-        return socialOauthList.stream()
-                .filter(x -> x.type() == socialLoginType)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("알 수 없는 SocialLoginType 입니다."));
-    }
+
 
     public void kakaoLogout(){
 
