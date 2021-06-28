@@ -5,9 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface ManagerRepositor extends JpaRepository<Manager,Long> {
+public interface ManagerRepositoy extends JpaRepository<Manager,Long> {
 
     Manager findManagerByManagerIdAndPassword(String id,String password);
 
@@ -18,5 +19,8 @@ public interface ManagerRepositor extends JpaRepository<Manager,Long> {
     boolean existsManagerByName(String name);
 
     Manager findManagerByName(String name);
+
+
+    Manager findByManagerId(String managerId);
 
 }

@@ -13,27 +13,28 @@
 <div class="box1">
   <br><br><br>
   <h3>관리자 페이지 입니다.</h3>
-  <form id="maform" method="post">
-    <input type="text" id="id" name="id" placeholder="사장 ID">
-    <input type="password" id="pass" name="pass" placeholder="사장 pw">
+  <form id="maform" method="post" >
+    <input type="text" id="id" name="id" placeholder="ID">
+    <input type="password" id="pass" name="pass" placeholder="pw">
     <input type="button" id="add" value="로그인">
     <input type="button" id ="main" value="취소">
+    <input type="hidden" id="ajax">
   </form>
-  <form action="/auth/kakao">
-  <input type="submit" id="manager" value="직원로그인">
-  </form>
+
 </div>
+
+
 
 <script>
   $(function(){
     $('#main').on('click', function(e) {
-      $(location).attr('href','/Park/main.jsp');
+      $(location).attr('href','/');
     });
   });
 </script>
 
 
-<script>
+<script th:inline="javascript">
   $(function(){
 
     $('#add').on('click', function(e) {
@@ -42,17 +43,21 @@
       var pass = document.getElementById('pass').value;
       var str = {"managerId":id,"password":pass};
       $.ajax({
-
-        url:'/manager/login',
+        url:'/login',
         type:'POST',
         data : JSON.stringify(str),
         dataType : 'json',
         contentType : 'application/json',
         success : function(data){
           console.log(data);
-          if(data === 1) $(location).attr('href','/manager/');
-          else if(data === 0) alert("존재하지 않은 계정");
-          else alert("아이디/패스워드 확인");
+          if(data === "-1") $(location).attr('오류');
+          else if(data === "0") alert("id/password check");
+          else if(data === 1){
+            console.log([[${session['token']}]]);
+            localStorage.token = [[${session['token']}]];
+            $(location).attr('href','/managerMain');
+          }
+          else alert("???");
         },
         error:function(data){
           console.log(data);
@@ -62,9 +67,7 @@
     });
   });
 
-
 </script>
-
 
 
 

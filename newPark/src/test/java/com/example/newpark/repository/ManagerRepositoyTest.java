@@ -7,13 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
-class ManagerRepositorTest {
+class ManagerRepositoyTest {
 
     @Autowired
-    ManagerRepositor managerRepositor;
+    ManagerRepositoy managerRepositoy;
 
     @Test
     public void create(){
@@ -25,7 +23,7 @@ class ManagerRepositorTest {
         manager.setPhone("010-0000-0000");
         manager.setCreatedAt(LocalDateTime.now());
 
-        managerRepositor.save(manager);
+        managerRepositoy.save(manager);
 
     }
 
