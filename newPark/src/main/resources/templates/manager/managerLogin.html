@@ -48,14 +48,15 @@
         data : JSON.stringify(str),
         dataType : 'json',
         contentType : 'application/json',
+
         success : function(data){
           console.log(data);
           if(data === "-1") $(location).attr('오류');
           else if(data === "0") alert("id/password check");
           else if(data === 1){
-            console.log([[${session['token']}]]);
-            localStorage.token = [[${session['token']}]];
-            $(location).attr('href','/managerMain');
+            var cookie = document.cookie;
+            console.log(cookie);
+            location.replace("/managerMain")
           }
           else alert("???");
         },

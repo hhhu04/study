@@ -1,5 +1,6 @@
 package com.example.newpark.jwt;
 
+import com.example.newpark.domain.Manager;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -13,10 +14,7 @@ import org.springframework.security.core.Authentication;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Component
@@ -36,9 +34,10 @@ public class JwtTokenProvider {
     }
 
     // JWT 토큰 생성
-    public String createToken(String userPk) {
+    public String createToken(String userPk, Map<String,String> manager,String roles) {
         Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
-        claims.put("roles", "a"); // 정보는 key / value 쌍으로 저장된다.
+        claims.put("roles", roles); // 정보는 key / value 쌍으로 저장된다.
+        System.out.println(roles);
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims) // 정보 저장

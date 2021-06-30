@@ -42,8 +42,8 @@ public class ManagerController {
     public int managerLogin(@RequestBody Map<String,String> manager, HttpServletResponse response,HttpServletRequest request)  {
         try {
             String token = managerService.login(manager);
-//            Cookie cookie= new Cookie("token",token);
-//            response.addCookie(cookie);
+            Cookie cookie= new Cookie("token",token);
+            response.addCookie(cookie);
             HttpSession session = request.getSession();
             session.setAttribute("token",token);
             return 1;
@@ -57,7 +57,19 @@ public class ManagerController {
 
     }
 
+    @GetMapping("/managerJoin")
+    public String join(){
+        return "manager/join";
+    }
 
+    @PostMapping("/manager/join")
+    @ResponseBody
+    public int managerJoin(@RequestBody Manager manager){
+
+
+
+        return 1;
+    }
 
 
     @PostMapping("manager/managerList")

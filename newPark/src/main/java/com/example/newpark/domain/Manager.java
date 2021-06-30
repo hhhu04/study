@@ -40,10 +40,21 @@ public class Manager implements UserDetails{
 
     private LocalDateTime expireAt;
 
+    private String roles;
+
+
+    public Manager join(Manager manager){
+        manager.setCreatedAt(LocalDateTime.now());
+        manager.setGrade("normal");
+        manager.setRoles("a");
+        return manager;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<String> roles = new ArrayList<>();
         roles.add("a");
+//        roles.add(this.roles);
         return roles.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
