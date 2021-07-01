@@ -15,9 +15,11 @@
 
 <script th:inline="javascript">
     // var token=[[${session['token']}]];
-    var token=Cookies.get("token");
-    localStorage.token = token;
-    Cookies.remove("token");
+    if(!("token" in localStorage)){
+        var token=Cookies.get("token");
+        localStorage.token = token;
+        Cookies.remove("token");
+    }
     if(localStorage.getItem("token") == null) $(location).attr('href','/managerLogin');
 
 
@@ -87,7 +89,7 @@
                         <!--li(str[i]);-->
                     }
                     $list = $('ul');
-                    $list.append('<li >' +'<a href="managerjoin.jsp"<button id="adder" class="btn btn-primary" >관리자 추가</button></a> &#09; <a href="managerexpire.jsp"<button id="adder" class="btn btn-primary" >관리자 제거</button></a>'+ '</li>');
+                    $list.append('<li >' +'<a href="managerJoin"<button id="adder" class="btn btn-primary" >관리자 추가</button></a> &#09; <a href="managerDelete"<button id="delete" class="btn btn-primary" >관리자 제거</button></a>'+ '</li>');
                 },
                 error:function(data){
                     console.log(data);

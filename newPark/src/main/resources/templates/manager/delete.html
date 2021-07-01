@@ -10,7 +10,6 @@
     <title>Insert title here</title>
 </head>
 <body>
-
 <script>
     if(localStorage.getItem("token") == null) $(location).attr('href','/managerLogin');
 </script>
@@ -20,10 +19,7 @@
     <h4>관리자 가입</h4>
     <form id = "managerform" method="POST">
         <input type="text" id="email" name = "email" placeholder="관리자ID"><br>
-        <input type="password" id="pass" name = "pass" placeholder="비밀번호"><br>
-        <input type="text" id="name" name = "name" placeholder="이름"><br>
-        <input type="text" id="phone" name = "phone" placeholder="핸드폰"><br>
-        <input type="button" id = "add" value="가입"><input type="button" id ="main" value="취소">
+        <input type="button" id = "add" value="삭제"><input type="button" id ="main" value="취소">
     </form>
 
 </div>
@@ -42,15 +38,12 @@
         $('#add').on('click', function(e) {
             // var str = $("#managerform").serialize();
             var email = document.getElementById('email').value;
-            var pas = document.getElementById('pass').value;
-            var name = document.getElementById('name').value;
-            var phone = document.getElementById('phone').value;
 
-            var str = {'managerId':email,'password':pas,'name':name,'phone':phone};
+            var str = {'managerId':email};
 
             var token = localStorage.getItem("token");
             $.ajax({
-                url:'/manager/join',
+                url:'/manager/delete',
                 type:'POST',
                 data : JSON.stringify(str),
                 dataType : 'json',
@@ -60,11 +53,11 @@
                 },
                 success : function(data){
                     console.log(data);
-                    if(data === "-1") alert("아이디가 짧음");
-                    else if(data === -2) alert("이미 존재하는 ID");
+                    if(data === -2) alert("master 계정, 삭제불가");
+                    else if(data === -1) alert("없는 계정");
 
                     else if(data === 1){
-                        alert("가입 완료");
+                        alert("삭제 완료");
                         $(location).attr('href','/managerMain');
                     }
                 },

@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -21,6 +24,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final ParkLogsRepository parkLogsRepository;
+    private final RemainPark remainPark;
 
 
     public Member findCar(Member member) throws Exception{
@@ -87,6 +91,24 @@ public class MemberService {
     }
 
 
+    public int clock() throws Exception {
+        List<Member> list= new ArrayList<>();
+        list = memberRepository.findMemberByMemberGrade("normal");
+
+        for (int i=0;i<list.size();i++){
+            int money = list.get(i).getExpectedPayment();
+            LocalDateTime time = list.get(i).getInDate();
+            if(time.getDayOfMonth() == LocalDateTime.now().getDayOfMonth() ) {
+                if(money < 20000) money+=1500;
+            }
+            else {
+                money+=20000;
+            }
+            list.get(i).setExpectedPayment(money);
+        }
+        memberRepository.saveAll(list);
+        return 1;
+    }
 
 
 

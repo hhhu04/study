@@ -38,6 +38,7 @@ public class JwtTokenProvider {
         Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
         claims.put("roles", roles); // 정보는 key / value 쌍으로 저장된다.
         System.out.println(roles);
+        if(roles.equals("master")) tokenValidTime = tokenValidTime*2;
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims) // 정보 저장

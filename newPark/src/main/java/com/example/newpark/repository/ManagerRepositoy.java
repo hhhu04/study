@@ -23,4 +23,6 @@ public interface ManagerRepositoy extends JpaRepository<Manager,Long> {
 
     Manager findByManagerId(String managerId);
 
+    boolean existsManagerByManagerId(String id);
+
 }

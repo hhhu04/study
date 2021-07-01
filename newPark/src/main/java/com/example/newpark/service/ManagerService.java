@@ -35,6 +35,25 @@ public class ManagerService {
     }
 
 
+    public int join(Manager manager) throws Exception{
+         manager = manager.join(manager);
+         if(!managerRepositoy.existsManagerByManagerId(manager.getManagerId())) {
+            managerRepositoy.save(manager);
+            return  1;
+        }
+         return -2;
+    }
+
+    public int delete(Manager manager)throws Exception{
+        if(managerRepositoy.existsManagerByManagerId(manager.getManagerId())){
+            if(manager.getManagerId().equals("123")) return -2;
+            manager = managerRepositoy.findByManagerId(manager.getManagerId());
+            managerRepositoy.delete(manager);
+            return 1;
+        }
+        return -1;
+    }
+
 
 
     public List<Manager> findAll() throws Exception{
