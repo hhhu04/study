@@ -3,28 +3,35 @@ package com.example.newpark.service;
 import com.example.newpark.domain.Manager;
 import com.example.newpark.domain.Member;
 import com.example.newpark.domain.PaymentLogs;
-import com.example.newpark.repository.ManagerRepositor;
+import com.example.newpark.jwt.JwtTokenProvider;
+import com.example.newpark.repository.ManagerRepositoy;
 import com.example.newpark.repository.MemberRepository;
 import com.example.newpark.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class ManagerService {
 
-    private final ManagerRepositor managerRepositor;
+    private final ManagerRepositoy managerRepositoy;
     private final PaymentRepository paymentRepository;
     private final MemberRepository memberRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
 
-    public int login(Manager manager) throws Exception{
-        Long id = managerRepositor.findManagerByManagerIdAndPassword(manager.getManagerId(), manager.getPassword()).getId();
-        System.out.println(manager);
-        if(id == null) return 0;
-        return 1;
+    public String login(Map<String,String> manager) throws Exception{
+        System.out.println(manager.get("password"));
+        System.out.println();
+        Manager mana = managerRepositoy.findByManagerId(manager.get("managerId"));
+        if (managerRepositoy.findByManagerId(manager.get("managerId")) == null) throw new IllegalArgumentException("가입되지 않은 사용자 입니다.");
+        if (!manager.get("password").equals(mana.getPassword())) throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+        System.out.println(mana);
+        return jwtTokenProvider.createToken(mana.getManagerId(),manager,mana.getRoles());
     }
 
 
@@ -32,7 +39,7 @@ public class ManagerService {
 
     public List<Manager> findAll() throws Exception{
         List<Manager> list;
-        list = managerRepositor.findAll();
+        list = managerRepositoy.findAll();
         return list;
     }
 

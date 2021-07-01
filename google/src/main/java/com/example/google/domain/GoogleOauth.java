@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class GoogleOauth implements SocialOauth {
+public class GoogleOauth  {
     private final String GOOGLE_SNS_BASE_URL = "https://accounts.google.com/o/oauth2/v2/auth";
     private final String GOOGLE_SNS_CLIENT_ID = "838439285606-tjlqi3iabc60uf5gvoq7bnrs3odfpkr4.apps.googleusercontent.com";
     private final String GOOGLE_SNS_CALLBACK_URL = "http://localhost:8080/auth/google/callback";
@@ -27,7 +27,6 @@ public class GoogleOauth implements SocialOauth {
     private final String GOOGLE_SNS_TOKEN_BASE_URL = "https://oauth2.googleapis.com/token";
 
 
-    @Override
     public String getOauthRedirectURL() {
         Map<String, Object> params = new HashMap<>();
         params.put("scope", "profile");
@@ -42,7 +41,6 @@ public class GoogleOauth implements SocialOauth {
         return GOOGLE_SNS_BASE_URL + "?" + parameterString;
     }
 
-    @Override
     public String requestAccessToken(String code) {
         RestTemplate restTemplate = new RestTemplate();
 

@@ -1,6 +1,5 @@
 package com.example.google.controller;
 
-import com.example.google.domain.SocialLoginType;
 import com.example.google.service.OauthService;
 import com.example.google.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ public class OauthController {
      */
     @GetMapping(value = "/{socialLoginType}")
     public void socialLoginType(
-            @PathVariable(name = "socialLoginType") SocialLoginType socialLoginType) {
+            @PathVariable(name = "socialLoginType") String socialLoginType) {
         log.info(">> 사용자로부터 SNS 로그인 요청을 받음 :: {} Social Login", socialLoginType);
         oauthService.request(socialLoginType);
     }
@@ -38,7 +37,7 @@ public class OauthController {
      */
     @GetMapping(value = "/{socialLoginType}/callback")
     public String callback(
-            @PathVariable(name = "socialLoginType") SocialLoginType socialLoginType,
+            @PathVariable(name = "socialLoginType") String socialLoginType,
             @RequestParam(name = "code") String code, HttpServletRequest request) {
         log.info(">> 소셜 로그인 API 서버로부터 받은 code :: {}", code);
         String email = oauthService.requestAccessToken(socialLoginType, code);

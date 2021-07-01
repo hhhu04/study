@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
-public class KakaoOauth implements SocialOauth {
+public class KakaoOauth  {
     private final String KAKAO_SNS_BASE_URL = "https://kauth.kakao.com/oauth/authorize";
     private final String KAKAO_SNS_CLIENT_ID = "b4dad0c3fd74414e64580f182c1e5df9";
     private final String KAKAO_SNS_CALLBACK_URL = "http://localhost:8080/auth/kakao/callback";
@@ -22,7 +22,6 @@ public class KakaoOauth implements SocialOauth {
     private String to;
 
 
-    @Override
     public String getOauthRedirectURL() {
         Map<String, Object> params = new HashMap<>();
         params.put("client_id", KAKAO_SNS_CLIENT_ID);
@@ -35,7 +34,6 @@ public class KakaoOauth implements SocialOauth {
         return KAKAO_SNS_BASE_URL + "?" + parameterString;
     }
 
-    @Override
     public String requestAccessToken(String code) {
         RestTemplate restTemplate = new RestTemplate();
 

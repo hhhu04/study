@@ -5,14 +5,18 @@ import com.example.newpark.domain.Member;
 import com.example.newpark.domain.PaymentLogs;
 import com.example.newpark.service.ManagerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpCookie;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,38 +24,51 @@ public class ManagerController {
 
     private final ManagerService managerService;
 
-    @GetMapping("manager")
-    public String main(){
+    @GetMapping("/managerMain")
+    public String main(HttpServletResponse response){
+
         return "manager/main";
     }
 
-    @GetMapping("manager/managerLogin")
+
+
+    @GetMapping("managerLogin")
     public String login(){
         return "manager/managerLogin";
     }
 
-    @PostMapping("manager/login")
+    @PostMapping("login")
     @ResponseBody
-    public int managerLogin(@RequestBody Manager manager, HttpServletRequest request, HttpServletResponse response){
-        try{
-            int num=0;
-            num = managerService.login(manager);
-            if(num == 1){
-                Cookie cookie = new Cookie("id",manager.getManagerId());
-                System.out.println(cookie.getValue());
-                response.addCookie(cookie);
-
-                HttpSession session = request.getSession();
-
-                session.setAttribute("id",manager.getManagerId());
-            }
-
-            return num;
+    public int managerLogin(@RequestBody Map<String,String> manager, HttpServletResponse response,HttpServletRequest request)  {
+        try {
+            String token = managerService.login(manager);
+            Cookie cookie= new Cookie("token",token);
+            response.addCookie(cookie);
+            HttpSession session = request.getSession();
+            session.setAttribute("token",token);
+            return 1;
+        }catch (IllegalArgumentException e){
+            e.printStackTrace();
+            return 0;
         }catch (Exception e){
             e.printStackTrace();
             return -1;
         }
 
+    }
+
+    @GetMapping("/managerJoin")
+    public String join(){
+        return "manager/join";
+    }
+
+    @PostMapping("/manager/join")
+    @ResponseBody
+    public int managerJoin(@RequestBody Manager manager){
+
+
+
+        return 1;
     }
 
 
@@ -105,18 +122,24 @@ public class ManagerController {
 
 
 
-    @PostMapping("manager/logout")
+    @PostMapping("/out")
     @ResponseBody
     public int logout(HttpServletResponse response, HttpServletRequest request,@CookieValue(value="id", required=false) Cookie cookie){
         HttpSession session = request.getSession();
         session.invalidate();
-
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
+        System.out.println("asd");
+//        cookie.setMaxAge(0);
+//        response.addCookie(cookie);
 
 
         return 1;
     }
+//
+//    @PostMapping("out")
+//    @ResponseBody
+//    public void out(){
+//        oauthService.out();
+//    }
 
 
 
