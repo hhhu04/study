@@ -1,9 +1,11 @@
 package com.example.newpark.config;
 
 import com.example.newpark.domain.Park;
+import org.springframework.context.annotation.Configuration;
 
 import java.io.*;
 
+@Configuration
 public class RemainPark {
 
     public Park readSetting() throws IOException {

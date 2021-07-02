@@ -21,9 +21,12 @@ import java.util.*;
 public class JwtTokenProvider {
 
     private String secretKey = "webfirewood";
+    private String secretKey2 = "rewebfirewood";
 
     // 토큰 유효시간 30분
     private long tokenValidTime = 30 * 60 * 1000L;
+
+    private long re = tokenValidTime*12*7;
 
     private final UserDetailsService userDetailsService;
 
@@ -38,6 +41,7 @@ public class JwtTokenProvider {
         Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
         claims.put("roles", roles); // 정보는 key / value 쌍으로 저장된다.
         System.out.println(roles);
+        if(roles.equals("master")) tokenValidTime = tokenValidTime*2;
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims) // 정보 저장
@@ -47,6 +51,22 @@ public class JwtTokenProvider {
                 // signature 에 들어갈 secret값 세팅
                 .compact();
     }
+
+    // re JWT 토큰 생성
+    public String reToken(String userPk, Map<String,String> manager,String roles) {
+        Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
+        Date now = new Date();
+        return Jwts.builder()
+                .setClaims(claims) // 정보 저장
+                .setIssuedAt(now) // 토큰 발행 시간 정보
+                .setExpiration(new Date(now.getTime() + re)) // set Expire Time
+                .signWith(SignatureAlgorithm.HS256, secretKey2)  // 사용할 암호화 알고리즘과
+                // signature 에 들어갈 secret값 세팅
+                .compact();
+    }
+
+
+
 
     // JWT 토큰에서 인증 정보 조회
     public Authentication getAuthentication(String token) {
