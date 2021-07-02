@@ -34,6 +34,17 @@ public class ManagerService {
         return jwtTokenProvider.createToken(mana.getManagerId(),manager,mana.getRoles());
     }
 
+    public String reToken(Map<String,String> manager)throws Exception{
+        Manager mana = managerRepositoy.findByManagerId(manager.get("managerId"));
+        if (managerRepositoy.findByManagerId(manager.get("managerId")) == null) throw new IllegalArgumentException("가입되지 않은 사용자 입니다.");
+        if (!manager.get("password").equals(mana.getPassword())) throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+        String token = jwtTokenProvider.reToken(mana.getManagerId(),manager,mana.getRoles());
+        mana.setToken(token);
+        managerRepositoy.save(mana);
+        return token;
+    }
+
+
 
     public int join(Manager manager) throws Exception{
          manager = manager.join(manager);

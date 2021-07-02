@@ -28,8 +28,11 @@ public class ManagerController {
     private final ManagerService managerService;
     private final MemberService memberService;
 
+
+
+
     @GetMapping("/managerMain")
-    public String main(HttpServletResponse response){
+    public String main(HttpServletResponse response) throws Exception{
 
         return "manager/main";
     }
@@ -46,6 +49,7 @@ public class ManagerController {
     public int managerLogin(@RequestBody Map<String,String> manager, HttpServletResponse response,HttpServletRequest request)  {
         try {
             String token = managerService.login(manager);
+            String reToken = managerService.reToken(manager);
             Cookie cookie= new Cookie("token",token);
             response.addCookie(cookie);
             HttpSession session = request.getSession();

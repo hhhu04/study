@@ -42,6 +42,8 @@ public class Manager implements UserDetails{
 
     private String roles;
 
+    private String token;
+
 
     public Manager join(Manager manager){
         manager.setCreatedAt(LocalDateTime.now());
