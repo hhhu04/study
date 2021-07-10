@@ -8,7 +8,6 @@ import com.example.newpark.repository.ManagerRepositoy;
 import com.example.newpark.repository.MemberRepository;
 import com.example.newpark.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -39,6 +39,10 @@
           alert("출차!");
             $(location).attr('href','/');
         }
+          else if(data ===0) alert("결제안됨");
+          else{
+            alert("시스템 오류");
+          }
         },
         error:function(data){
           console.log(data);
