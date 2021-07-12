@@ -33,6 +33,7 @@ public class PaymentController {
     @ResponseBody
     public int checkCar(@RequestBody Member member, HttpServletRequest request, HttpServletResponse response){
         try {
+            if(!member.number(member)) return 0;
             member = memberService.findCar(member);
             Cookie cookie = new Cookie("carNumber",member.getCarNumber());
             System.out.println(cookie.getValue());
