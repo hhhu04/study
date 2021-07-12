@@ -9,6 +9,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Entity
 @Data
@@ -84,6 +86,15 @@ public class Member {
         member.setOutDate(LocalDateTime.now());
         member.setPaymentStatus("null");
         return member;
+    }
+
+    public boolean number(Member member) throws Exception{
+        String pattern = "\\d{2}+[가-힣]+\\d{4}";
+        String pattern2 = "\\d{3}+[가-힣]+\\d{4}";
+        boolean result = Pattern.matches(pattern,member.carNumber);
+        if(result)return true;
+        result = Pattern.matches(pattern2,member.carNumber);
+        return result;
     }
 
 

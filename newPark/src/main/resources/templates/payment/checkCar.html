@@ -11,7 +11,7 @@
 <body>
 <div class="box1">
 <form id="inForm" method="POST">
-    <input type="text"  id="car_number" name="car_number" placeholder="차번">
+    <input type="text"  id="car_number" name="car_number" placeholder="차번" maxlength="8">
     <input type="button" value="입력" id="add">
     <input type="button" id ="main" value="취소">
 </form>
@@ -47,6 +47,7 @@
                         document.cookie = "carNumber="+carNumber;
                         $(location).attr('href','/payment');
                     }
+                    else if(data === 0) alert("차량번호 확인");
 
                 },
                 error:function(data){

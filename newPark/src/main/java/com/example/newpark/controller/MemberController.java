@@ -48,6 +48,7 @@ public class MemberController {
         try {
             int num = 0;
 
+            if(!member.number(member)) return -3;
 
             num = memberService.insert(member);
 
@@ -73,6 +74,7 @@ public class MemberController {
     @ResponseBody
     public int outCar(@RequestBody Member member){
         try{
+            if(!member.number(member)) return 0;
             member = memberService.findCar(member);
             if(member.getPaymentStatus().equals("not")) return 0;
             else return memberService.out(member);
@@ -95,6 +97,7 @@ public class MemberController {
     @ResponseBody
     public int join(@RequestBody Card card, Member member){
         try{
+            if(!member.number(member)) return 0;
             memberService.memberJoin(card, member);
             return 1;
         }catch (Exception e){
