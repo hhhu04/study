@@ -1,6 +1,6 @@
 package com.example.newpark.config;
 
-import com.example.newpark.domain.Park;
+import com.example.newpark.dto.Park;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.*;

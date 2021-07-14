@@ -42,6 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/manager/**").authenticated()
                 .antMatchers("/manager/join").hasRole("master")
                 .antMatchers("/manager/delete").hasRole("master")
+                .antMatchers("/manager/check").hasRole("master")
+                .antMatchers("/manager/masterCheck").hasRole("master")
                 .anyRequest().permitAll() // 그외 나머지 요청은 누구나 접근 가능
                 .and()
                 .addFilterBefore(new com.example.newpark.jwt.JwtAuthenticationFilter(jwtTokenProvider),

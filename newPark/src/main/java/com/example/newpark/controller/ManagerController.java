@@ -2,16 +2,13 @@ package com.example.newpark.controller;
 
 import com.example.newpark.domain.Manager;
 import com.example.newpark.domain.Member;
-import com.example.newpark.domain.Park;
 import com.example.newpark.domain.PaymentLogs;
+import com.example.newpark.dto.Master;
 import com.example.newpark.service.ManagerService;
 import com.example.newpark.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpCookie;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -117,9 +114,40 @@ public class ManagerController {
         }
     }
 
-    @GetMapping("manager/clock")
-    public String clock(){
-        return "manager/clock";
+    @GetMapping("manager/masterCheck")
+    public String masterCheck(){
+
+        return "manager/masterLogin";
+    }
+
+    @PostMapping("manager/check")
+    @ResponseBody
+    public int check(@RequestBody Master master, HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession();
+            int num = managerService.master(master);
+            if(num == 1){
+                session.setAttribute(master.getName(),master.getId());
+            }
+            return num;
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+
+    }
+
+    @GetMapping("clock")
+    public String clock(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(60*60);
+        try {
+            memberService.clock();
+            return "manager/clock";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "manager/clockError";
+        }
     }
 
 
