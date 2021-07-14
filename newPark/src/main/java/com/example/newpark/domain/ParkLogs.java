@@ -1,6 +1,7 @@
 package com.example.newpark.domain;
 
 import com.example.newpark.config.RemainPark;
+import com.example.newpark.dto.Park;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

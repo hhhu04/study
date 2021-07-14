@@ -3,7 +3,6 @@ package com.example.newpark.service;
 import com.example.newpark.config.RemainPark;
 import com.example.newpark.domain.Card;
 import com.example.newpark.domain.Member;
-import com.example.newpark.domain.Park;
 import com.example.newpark.domain.ParkLogs;
 import com.example.newpark.repository.MemberRepository;
 import com.example.newpark.repository.ParkLogsRepository;
@@ -11,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 

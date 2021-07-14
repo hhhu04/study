@@ -3,6 +3,7 @@ package com.example.newpark.service;
 import com.example.newpark.domain.Manager;
 import com.example.newpark.domain.Member;
 import com.example.newpark.domain.PaymentLogs;
+import com.example.newpark.dto.Master;
 import com.example.newpark.jwt.JwtTokenProvider;
 import com.example.newpark.repository.ManagerRepositoy;
 import com.example.newpark.repository.MemberRepository;
@@ -43,6 +44,12 @@ public class ManagerService {
         return token;
     }
 
+    public int master(Master master) throws Exception{
+        String grade = managerRepositoy.findByManagerId(master.getId()).getGrade();
+
+        if(grade.equals("master")) return 1;
+        else return 0;
+    }
 
 
     public int join(Manager manager) throws Exception{
@@ -83,4 +90,7 @@ public class ManagerService {
         list = memberRepository.findMemberByMemberGrade("member");
         return list;
     }
+
+
+
 }
