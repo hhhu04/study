@@ -114,7 +114,7 @@ public class ManagerController {
         }
     }
 
-    @GetMapping("manager/masterCheck")
+    @GetMapping("masterCheck")
     public String masterCheck(){
 
         return "manager/masterLogin";
@@ -127,7 +127,7 @@ public class ManagerController {
             HttpSession session = request.getSession();
             int num = managerService.master(master);
             if(num == 1){
-                session.setAttribute(master.getName(),master.getId());
+                session.setAttribute("id",master.getId());
             }
             return num;
         }catch (Exception e){
@@ -140,14 +140,29 @@ public class ManagerController {
     @GetMapping("clock")
     public String clock(HttpServletRequest request){
         HttpSession session = request.getSession();
-        session.setMaxInactiveInterval(60*60);
+
         try {
             memberService.clock();
+            session.setMaxInactiveInterval(60*60);
+            if(session.getAttribute("id").equals("123")) new Exception();
             return "manager/clock";
         }catch (Exception e){
             e.printStackTrace();
             return "manager/clockError";
         }
+    }
+
+
+    @PostMapping("/mail")
+    @ResponseBody
+    public String sendMail(){
+        try {
+            managerService.mailSend();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+        return "redirect:http://localhost:8080/";
     }
 
 

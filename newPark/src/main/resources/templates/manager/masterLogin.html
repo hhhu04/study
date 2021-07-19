@@ -41,7 +41,9 @@
       // var str = $("#maform").serialize();
       var id = document.getElementById('id').value;
       var pass = document.getElementById('pass').value;
-      var str = {"managerId":id,"password":pass};
+      var str = {"id":id,"password":pass};
+      var token = localStorage.getItem("token");
+      console.log(token);
       $.ajax({
         url:'/manager/check',
         type:'POST',
