@@ -9,6 +9,8 @@ import com.example.newpark.repository.ManagerRepositoy;
 import com.example.newpark.repository.MemberRepository;
 import com.example.newpark.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,6 +47,7 @@ public class ManagerService {
     }
 
     public int master(Master master) throws Exception{
+        System.out.println(master);
         String grade = managerRepositoy.findByManagerId(master.getId()).getGrade();
 
         if(grade.equals("master")) return 1;
@@ -91,6 +94,20 @@ public class ManagerService {
         return list;
     }
 
+
+    private final JavaMailSender mailSender;
+    private static final String FROM_ADDRESS = "ShinTest94@gmail.com";
+    private static final String SET_ADDRESS = "hhhu04@gmail.com";
+
+    public void mailSend() throws Exception{
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(SET_ADDRESS);
+        message.setFrom(FROM_ADDRESS);
+        message.setSubject("요금 갱신 오류");
+        message.setText("error");
+        mailSender.send(message);
+
+    }
 
 
 }
