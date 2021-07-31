@@ -1,4 +1,4 @@
-package com.example.newpark.domain;
+package com.example.newpark.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

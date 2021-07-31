@@ -1,12 +1,11 @@
 package com.example.newpark.controller;
 
-import com.example.newpark.domain.Card;
-import com.example.newpark.domain.Member;
-import com.example.newpark.domain.PaymentLogs;
+import com.example.newpark.dto.Card;
+import com.example.newpark.entity.Member;
+import com.example.newpark.entity.PaymentLogs;
 import com.example.newpark.service.MemberService;
 import com.example.newpark.service.PaymentService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.GeneratorType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

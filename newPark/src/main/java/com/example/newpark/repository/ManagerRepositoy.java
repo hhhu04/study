@@ -1,11 +1,10 @@
 package com.example.newpark.repository;
 
-import com.example.newpark.domain.Manager;
+import com.example.newpark.entity.Manager;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ManagerRepositoy extends JpaRepository<Manager,Long> {

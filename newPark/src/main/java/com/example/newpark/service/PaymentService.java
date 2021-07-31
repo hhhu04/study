@@ -1,8 +1,8 @@
 package com.example.newpark.service;
 
-import com.example.newpark.domain.Card;
-import com.example.newpark.domain.Member;
-import com.example.newpark.domain.PaymentLogs;
+import com.example.newpark.dto.Card;
+import com.example.newpark.entity.Member;
+import com.example.newpark.entity.PaymentLogs;
 import com.example.newpark.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

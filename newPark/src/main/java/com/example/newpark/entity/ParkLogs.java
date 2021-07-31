@@ -1,4 +1,4 @@
-package com.example.newpark.domain;
+package com.example.newpark.entity;
 
 import com.example.newpark.config.RemainPark;
 import com.example.newpark.dto.Park;

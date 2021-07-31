@@ -13,21 +13,11 @@
 </head>
 <body>
 
-<script th:inline="javascript">
-    // var token=[[${session['token']}]];
-    if(!("token" in localStorage)){
-        var token=Cookies.get("token");
-        localStorage.token = token;
-        Cookies.remove("token");
-    }
-    if(localStorage.getItem("token") == null) $(location).attr('href','/managerLogin');
-
-
-</script>
 
 <div class="box1">
     <br><br><br>
     <h4>관리자 매뉴</h4>
+    <a th:if="${master!=null}" href="clock"><button id="adder" class="btn btn-primary" >clock</button></a>
     <button id="1" class="btn btn-primary" >직원 목록</button>
     <button id="3" class="btn btn-primary" >정산 목록</button>
     <button id="4" class="btn btn-primary" >정기회원 목록</button>

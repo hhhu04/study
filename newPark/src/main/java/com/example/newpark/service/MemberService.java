@@ -1,9 +1,9 @@
 package com.example.newpark.service;
 
 import com.example.newpark.config.RemainPark;
-import com.example.newpark.domain.Card;
-import com.example.newpark.domain.Member;
-import com.example.newpark.domain.ParkLogs;
+import com.example.newpark.dto.Card;
+import com.example.newpark.entity.Member;
+import com.example.newpark.entity.ParkLogs;
 import com.example.newpark.repository.MemberRepository;
 import com.example.newpark.repository.ParkLogsRepository;
 import lombok.RequiredArgsConstructor;
@@ -99,7 +99,9 @@ public class MemberService {
                 if(money < 20000) money+=1500;
             }
             else {
-                money+=20000;
+                if(LocalDateTime.now().getHour() == 00 && LocalDateTime.now().getMinute() == 00) {
+                    money += 20000;
+                }
             }
             list.get(i).setExpectedPayment(money);
         }

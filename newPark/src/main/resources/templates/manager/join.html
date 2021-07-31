@@ -11,10 +11,6 @@
 </head>
 <body>
 
-<script>
-    if(localStorage.getItem("token") == null) $(location).attr('href','/managerLogin');
-</script>
-
 <div class="box1">
 
     <h4>관리자 가입</h4>
@@ -65,7 +61,7 @@
 
                     else if(data === 1){
                         alert("가입 완료");
-                        $(location).attr('href','/managerMain');
+                        $(location).attr('href','/manager/');
                     }
                 },
                 error:function(data){

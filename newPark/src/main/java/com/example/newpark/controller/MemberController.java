@@ -1,9 +1,9 @@
 package com.example.newpark.controller;
 
 import com.example.newpark.config.RemainPark;
-import com.example.newpark.domain.Card;
-import com.example.newpark.domain.Member;
-import com.example.newpark.domain.ParkLogs;
+import com.example.newpark.dto.Card;
+import com.example.newpark.entity.Member;
+import com.example.newpark.entity.ParkLogs;
 import com.example.newpark.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
