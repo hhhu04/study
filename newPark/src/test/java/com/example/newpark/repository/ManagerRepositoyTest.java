@@ -1,6 +1,6 @@
 package com.example.newpark.repository;
 
-import com.example.newpark.domain.Manager;
+import com.example.newpark.entity.Manager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

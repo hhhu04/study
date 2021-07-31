@@ -1,6 +1,6 @@
 package com.example.newpark.repository;
 
-import com.example.newpark.domain.PaymentLogs;
+import com.example.newpark.entity.PaymentLogs;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

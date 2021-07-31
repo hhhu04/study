@@ -1,6 +1,7 @@
-package com.example.newpark.domain;
+package com.example.newpark.entity;
 
 
+import com.example.newpark.dto.Card;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Entity
@@ -64,9 +64,9 @@ public class Member {
         return member;
     }
 
-    public Member updateGrade(Member member,Card card) throws Exception{
+    public Member updateGrade(Member member, Card card) throws Exception{
         member.setMemberGrade("member");
-        member.setExpectedPayment(0);
+        member.setExpectedPayment(1500);
         member.setPaymentStatus("okay");
         member.setJoinAt(LocalDateTime.now());
         LocalDateTime time = member.getJoinAt();

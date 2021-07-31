@@ -1,4 +1,4 @@
-package com.example.newpark.domain;
+package com.example.newpark.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -45,10 +46,15 @@ public class Manager implements UserDetails{
     private String token;
 
 
-    public Manager join(Manager manager){
+    public String passwordEncoder(String password,PasswordEncoder passwordEncoder){
+        return passwordEncoder.encode(password);
+    }
+
+    public Manager join(Manager manager, PasswordEncoder passwordEncoder){
         manager.setCreatedAt(LocalDateTime.now());
+        this.password = passwordEncoder(manager.password,passwordEncoder);
         manager.setGrade("normal");
-        manager.setRoles("a");
+        manager.setRoles("MANAGER");
         return manager;
     }
 

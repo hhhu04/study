@@ -1,19 +1,21 @@
 package com.example.newpark.controller;
 
-import com.example.newpark.domain.Manager;
-import com.example.newpark.domain.Member;
-import com.example.newpark.domain.PaymentLogs;
+import com.example.newpark.entity.Manager;
+import com.example.newpark.entity.Member;
+import com.example.newpark.entity.PaymentLogs;
 import com.example.newpark.dto.Master;
 import com.example.newpark.service.ManagerService;
 import com.example.newpark.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -25,41 +27,12 @@ public class ManagerController {
     private final ManagerService managerService;
     private final MemberService memberService;
 
-
-
-
-    @GetMapping("/managerMain")
-    public String main(HttpServletResponse response) throws Exception{
-
-        return "manager/main";
-    }
-
-
-
-    @GetMapping("managerLogin")
-    public String login(){
-        return "manager/managerLogin";
-    }
-
-    @PostMapping("login")
-    @ResponseBody
-    public int managerLogin(@RequestBody Map<String,String> manager, HttpServletResponse response,HttpServletRequest request)  {
-        try {
-            String token = managerService.login(manager);
-            String reToken = managerService.reToken(manager);
-            Cookie cookie= new Cookie("token",token);
-            response.addCookie(cookie);
-            HttpSession session = request.getSession();
-            session.setAttribute("token",token);
-            return 1;
-        }catch (IllegalArgumentException e){
-            e.printStackTrace();
-            return 0;
-        }catch (Exception e){
-            e.printStackTrace();
-            return -1;
+    @GetMapping("/manager")
+    public String main(HttpServletResponse response, Model model, Principal principal) throws Exception{
+        if(principal.getName().equals("master")){
+            model.addAttribute("master","master");
         }
-
+        return "manager/main";
     }
 
     @GetMapping("/managerJoin")
@@ -70,16 +43,13 @@ public class ManagerController {
     @PostMapping("/manager/join")
     @ResponseBody
     public int managerJoin(@RequestBody Manager manager){
-
         try{
             return managerService.join(manager);
         }catch (Exception e){
             e.printStackTrace();
             return -1;
         }
-
     }
-
     @GetMapping("/managerDelete")
     public String delete(){
         return "manager/delete";
@@ -95,7 +65,6 @@ public class ManagerController {
             e.printStackTrace();
             return -1;
         }
-
     }
 
     @PostMapping("manager/memberUpdate")
@@ -138,13 +107,13 @@ public class ManagerController {
     }
 
     @GetMapping("clock")
-    public String clock(HttpServletRequest request){
+    public String clock(HttpServletRequest request, Principal principal){
         HttpSession session = request.getSession();
-
+        if(principal.getName().equals("master")) session.setAttribute("id","master");
         try {
             memberService.clock();
             session.setMaxInactiveInterval(60*60);
-            if(session.getAttribute("id").equals("123")) new Exception();
+            if(session.getAttribute("id").equals("master")) new Exception();
             return "manager/clock";
         }catch (Exception e){
             e.printStackTrace();
@@ -165,9 +134,6 @@ public class ManagerController {
         return "redirect:http://localhost:8080/";
     }
 
-
-
-
     @PostMapping("manager/managerList")
     @ResponseBody
     public List<Manager> managersList(HttpServletResponse response, HttpServletRequest request){
@@ -177,7 +143,6 @@ public class ManagerController {
             String mid = (String) session.getAttribute("id");
             System.out.println(mid);
             list = managerService.findAll();
-
 
         }catch (Exception e){
             e.printStackTrace();
@@ -195,7 +160,6 @@ public class ManagerController {
             String mid = (String) session.getAttribute("id");
             System.out.println(mid);
             list = managerService.findPayAll();
-
 
         }catch (Exception e){
             e.printStackTrace();
@@ -216,8 +180,6 @@ public class ManagerController {
         return list;
     }
 
-
-
     @PostMapping("/out")
     @ResponseBody
     public int logout(HttpServletResponse response, HttpServletRequest request,@CookieValue(value="id", required=false) Cookie cookie){
@@ -230,14 +192,6 @@ public class ManagerController {
 
         return 1;
     }
-//
-//    @PostMapping("out")
-//    @ResponseBody
-//    public void out(){
-//        oauthService.out();
-//    }
-
-
 
 
 }

@@ -1,6 +1,6 @@
 package com.example.newpark.jwt;
 
-import com.example.newpark.domain.Manager;
+import com.example.newpark.entity.Manager;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -37,7 +37,7 @@ public class JwtTokenProvider {
     }
 
     // JWT 토큰 생성
-    public String createToken(String userPk, Map<String,String> manager,String roles) {
+    public String createToken(String userPk, Manager manager, String roles) {
         Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
         claims.put("roles", roles); // 정보는 key / value 쌍으로 저장된다.
         System.out.println(roles);
@@ -53,7 +53,7 @@ public class JwtTokenProvider {
     }
 
     // re JWT 토큰 생성
-    public String reToken(String userPk, Map<String,String> manager,String roles) {
+    public String reToken(String userPk, Manager manager,String roles) {
         Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
         Date now = new Date();
         return Jwts.builder()
