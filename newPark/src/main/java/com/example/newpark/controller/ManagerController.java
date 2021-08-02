@@ -109,11 +109,12 @@ public class ManagerController {
     @GetMapping("clock")
     public String clock(HttpServletRequest request, Principal principal){
         HttpSession session = request.getSession();
-        if(principal.getName().equals("master")) session.setAttribute("id","master");
+
         try {
+            if(principal.getName().equals("master")) session.setAttribute("id","master");
+            else return "manager/main";
             memberService.clock();
             session.setMaxInactiveInterval(60*60);
-            if(session.getAttribute("id").equals("master")) new Exception();
             return "manager/clock";
         }catch (Exception e){
             e.printStackTrace();
