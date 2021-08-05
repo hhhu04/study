@@ -6,7 +6,9 @@
 </head>
 <body>
 
-
+<form action="/logout" method="post" th:action="@{/logout}">
+<input type="submit" value="로그아웃">
+</form>
 <!--<script th:inline="javascript">-->
 <!--  var car=[[${session['id']}]];-->
 <!--  console.log(car);-->

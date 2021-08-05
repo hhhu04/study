@@ -5,6 +5,8 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/miniCss.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -78,12 +80,18 @@
             var number = document.getElementById("number").value;
             var datas = {"card":card,"hal":hal,"month":month,"number":number};
 
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+
             $.ajax({
                 url:'/payment/payment',
                 type:'POST',
                 data : JSON.stringify(datas),
                 dataType : 'json',
                 contentType : 'application/json',
+                beforeSend : function(xhr) {
+                    xhr.setRequestHeader(header,token);
+                },
                 success : function(data) {
                     console.log(data);
                     if(data === 1) $(location).attr('href','/');
