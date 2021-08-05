@@ -5,6 +5,8 @@
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/miniCss.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -15,9 +17,9 @@
   <form id="memberform" method="POST">
     <br>
     <p><input type="text" id="car_number" name="car_number">&nbsp;차량 번호</p>
-    <p><input type="radio" id="check" name="check" value="1">1주 주차	&nbsp;
+    <p><input type="radio" id="check"  name="check" value="1">1주 주차	&nbsp;
       <input type="radio" id="check" name="check" value="2">1개월 주차	&nbsp;
-      <input type="radio" id="check" name="check" value="3">3개월 주차</p>
+      <input type="radio" id="check"  name="check" value="3">3개월 주차</p>
     <p>사용할 카드
       <select name="card" id="card">
         <option>==선택==</option>
@@ -68,6 +70,8 @@
       var car5 = document.getElementById('month').value;
       var car6 = document.getElementById('number').value;
       var car7 = document.getElementById('hal').value;
+      var token = $("meta[name='_csrf']").attr("content");
+      var header = $("meta[name='_csrf_header']").attr("content");
 
       var str = {"carNumber":car,"check":car2,"card":car3,"month":car5,"number":car6,"hal":car7};
       // var str = $("#memberform").serialize();
@@ -78,6 +82,9 @@
         data : JSON.stringify(str),
         dataType : 'json',
         contentType : 'application/json',
+        beforeSend : function(xhr) {
+          xhr.setRequestHeader(header,token);
+        },
         success : function(data){
           console.log(data);
           if(data === 1) {

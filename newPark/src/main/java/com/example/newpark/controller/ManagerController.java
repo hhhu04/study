@@ -35,6 +35,11 @@ public class ManagerController {
         return "manager/main";
     }
 
+    @GetMapping("login")
+    public String login(){
+        return "/manager/login";
+    }
+
     @GetMapping("/managerJoin")
     public String join(){
         return "manager/join";
@@ -137,14 +142,10 @@ public class ManagerController {
 
     @PostMapping("manager/managerList")
     @ResponseBody
-    public List<Manager> managersList(HttpServletResponse response, HttpServletRequest request){
+    public List<Manager> managersList(){
         List<Manager> list = null;
         try{
-            HttpSession session = request.getSession();
-            String mid = (String) session.getAttribute("id");
-            System.out.println(mid);
             list = managerService.findAll();
-
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -154,12 +155,9 @@ public class ManagerController {
 
     @PostMapping("manager/paymentList")
     @ResponseBody
-    public List<PaymentLogs> pyList(HttpServletResponse response, HttpServletRequest request){
+    public List<PaymentLogs> pyList(){
         List<PaymentLogs> list = null;
         try{
-            HttpSession session = request.getSession();
-            String mid = (String) session.getAttribute("id");
-            System.out.println(mid);
             list = managerService.findPayAll();
 
         }catch (Exception e){
@@ -171,7 +169,7 @@ public class ManagerController {
 
     @PostMapping("manager/memberList")
     @ResponseBody
-    public List<Member> mList(HttpServletRequest request){
+    public List<Member> mList(){
         List<Member> list = null;
         try{
             list = managerService.findMemAll();
@@ -181,18 +179,7 @@ public class ManagerController {
         return list;
     }
 
-    @PostMapping("/out")
-    @ResponseBody
-    public int logout(HttpServletResponse response, HttpServletRequest request,@CookieValue(value="id", required=false) Cookie cookie){
-        HttpSession session = request.getSession();
-        session.invalidate();
-        System.out.println("asd");
-//        cookie.setMaxAge(0);
-//        response.addCookie(cookie);
 
-
-        return 1;
-    }
 
 
 }

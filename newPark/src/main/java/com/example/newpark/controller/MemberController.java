@@ -93,7 +93,6 @@ public class MemberController {
     @ResponseBody
     public int join(@RequestBody Card card, Member member){
         try{
-            if(!member.number(member)) return 0;
             memberService.memberJoin(card, member);
             return 1;
         }catch (Exception e){

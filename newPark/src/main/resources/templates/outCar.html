@@ -5,6 +5,8 @@
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/miniCss.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -26,6 +28,8 @@
       // var str = $("#outForm").serialize();
       var car = document.getElementById('car_number').value;
       var str = {"carNumber":car};
+      var token = $("meta[name='_csrf']").attr("content");
+      var header = $("meta[name='_csrf_header']").attr("content");
       $.ajax({
 
         url:'/outCar',
@@ -33,6 +37,9 @@
         data : JSON.stringify(str),
         dataType : 'json',
         contentType : 'application/json',
+        beforeSend : function(xhr) {
+          xhr.setRequestHeader(header,token);
+        },
         success : function(data) {
           console.log(data);
           if (data === 1) {

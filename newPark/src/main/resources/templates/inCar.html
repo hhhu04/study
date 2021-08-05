@@ -5,6 +5,8 @@
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/miniCss.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
   <meta charset="UTF-8">
   <title>Insert title here</title>
 </head>
@@ -36,6 +38,8 @@
       var carNumber = document.getElementById("car_number").value;
       console.log(carNumber);
       var str = {"carNumber": carNumber};
+      var token = $("meta[name='_csrf']").attr("content");
+      var header = $("meta[name='_csrf_header']").attr("content");
       console.log(str);
       $.ajax({
 
@@ -44,6 +48,9 @@
         data : JSON.stringify(str),
         dataType : 'json',
         contentType : 'application/json',
+        beforeSend : function(xhr) {
+          xhr.setRequestHeader(header,token);
+        },
         success : function(data){
           console.log(data);
           if(data == 1) {

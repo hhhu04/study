@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="../css/miniCss.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta charset="UTF-8">
     <title>Insert title here</title>
 </head>
@@ -44,15 +46,16 @@
 
             var str = {'managerId':email,'password':pas,'name':name,'phone':phone};
 
-            var token = localStorage.getItem("token");
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
             $.ajax({
                 url:'/manager/join',
                 type:'POST',
                 data : JSON.stringify(str),
                 dataType : 'json',
                 contentType : 'application/json',
-                beforeSend: function( xhr ) {
-                    xhr.setRequestHeader("X-AUTH-TOKEN",token);
+                beforeSend : function(xhr) {
+                    xhr.setRequestHeader(header,token);
                 },
                 success : function(data){
                     console.log(data);

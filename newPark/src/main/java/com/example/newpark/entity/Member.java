@@ -66,7 +66,7 @@ public class Member {
 
     public Member updateGrade(Member member, Card card) throws Exception{
         member.setMemberGrade("member");
-        member.setExpectedPayment(1500);
+        member.setExpectedPayment(0);
         member.setPaymentStatus("okay");
         member.setJoinAt(LocalDateTime.now());
         LocalDateTime time = member.getJoinAt();
