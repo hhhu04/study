@@ -41,7 +41,6 @@ public class JwtTokenProvider {
         Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
         claims.put("roles", roles); // 정보는 key / value 쌍으로 저장된다.
         System.out.println(roles);
-        if(roles.equals("master")) tokenValidTime = tokenValidTime*2;
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims) // 정보 저장
@@ -66,8 +65,6 @@ public class JwtTokenProvider {
     }
 
 
-
-
     // JWT 토큰에서 인증 정보 조회
     public Authentication getAuthentication(String token) {
         System.out.println(this.getUserPk(token));
@@ -85,7 +82,7 @@ public class JwtTokenProvider {
 
     // Request의 Header에서 token 값을 가져옵니다. "X-AUTH-TOKEN" : "TOKEN값'
     public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("X-AUTH-TOKEN");
+        return request.getHeader("jwt");
     }
 
     // 토큰의 유효성 + 만료일자 확인

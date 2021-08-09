@@ -1,5 +1,8 @@
 package com.example.newpark.config;
 
+import com.example.newpark.jwt.CustomUserDetailService;
+import com.example.newpark.jwt.JwtAuthenticationFilter;
+import com.example.newpark.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +21,7 @@ import org.springframework.security.web.firewall.HttpFirewall;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final JwtTokenProvider jwtTokenProvider;
 
     // 암호화에 필요한 PasswordEncoder 를 Bean 등록합니다.
     @Bean
@@ -35,7 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+//                .httpBasic().disable()
 //                .csrf().disable()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
                 .authorizeRequests() // 요청에 대한 사용권한 체크
                 .antMatchers("/manager/**").authenticated()
                 .antMatchers("/manager/join","/managerJoin","/manager/delete","/managerDelete","/manager/check").hasRole("MASTER")
@@ -46,7 +53,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                         .loginPage("/login")
                 ;
-        http.httpBasic();
         http.logout().logoutSuccessUrl("/");
     }
 

@@ -17,4 +17,5 @@ public interface ManagerRepositoy extends JpaRepository<Manager,Long> {
 
 
 
+
 }
