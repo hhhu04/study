@@ -4,7 +4,6 @@ import com.example.newpark.entity.Manager;
 import com.example.newpark.entity.Member;
 import com.example.newpark.entity.PaymentLogs;
 import com.example.newpark.dto.Master;
-import com.example.newpark.jwt.JwtTokenProvider;
 import com.example.newpark.repository.ManagerRepositoy;
 import com.example.newpark.repository.MemberRepository;
 import com.example.newpark.repository.PaymentRepository;
@@ -15,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -51,6 +49,7 @@ public class ManagerService {
         }
         return -1;
     }
+
 
 
     public List<Manager> findAll() throws Exception{
