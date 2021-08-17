@@ -6,6 +6,17 @@
 	margin-top: 1%;
 	}
 
+.base {
+	text-align: center;
+}
+.feedTable {
+	width: 60%;
+	margin: auto;
+	text-align: center;
+}
+
+
+
 .location {
 	margin: 0 auto;
 	margin-top: 3%;
