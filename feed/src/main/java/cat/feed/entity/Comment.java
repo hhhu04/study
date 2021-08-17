@@ -17,11 +17,9 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private User userId;
+    private long userId;
 
-    @ManyToOne
-    private Feed feedId;
+    private long feedId;
 
     private String body;
 
@@ -29,5 +27,17 @@ public class Comment {
 
     private LocalDateTime updatedAt;
 
+    private String nickName;
+
+
+    public Comment newComment(Comment comment) {
+        comment.setCreatedAt(LocalDateTime.now());
+        return comment;
+    }
+
+    public Comment updateComment(Comment comment) {
+        comment.setUpdatedAt(LocalDateTime.now());
+        return comment;
+    }
 
 }

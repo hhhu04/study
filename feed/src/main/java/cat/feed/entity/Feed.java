@@ -31,7 +31,10 @@ public class Feed {
 
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "feedId")
+    private String nickName;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "feedId")
     private List<Comment> comments = new ArrayList<>();
 
     public Feed newFeed(Feed feed, long  id){
