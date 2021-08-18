@@ -22,4 +22,12 @@ public class CommentService {
         list = commentRepository.findAll();
         return list;
     }
+
+    public void delete(Comment comment) {
+        commentRepository.delete(comment);
+    }
+
+    public Comment find(long id) {
+        return commentRepository.findCommentById(id);
+    }
 }

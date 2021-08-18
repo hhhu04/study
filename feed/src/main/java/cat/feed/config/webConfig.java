@@ -45,7 +45,7 @@ public class webConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/login").anonymous()
                 .antMatchers("/user/join/**").anonymous()
                 .antMatchers("/user/**").authenticated()
-                .antMatchers("/comment/new","/feed/new").authenticated()
+                .antMatchers("/comment/new","/user/feed").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(tokenProvider),

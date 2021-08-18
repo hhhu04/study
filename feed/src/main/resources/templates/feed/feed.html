@@ -44,15 +44,11 @@
                td0(i + 1);
                td0(data[i]['nickName'])
                var title = data[i]['title'];
-               var link = "http://localhost:8080/feed/"+title;
+               // var link = "http://localhost:8080/feed/"+title;
+               var link = "http://192.168.93.129:8080/feed/"+title;
                td0('<a href="'+link+'">'+title+'</a>')
                td0(data[i]['createdAt'])
-               if (data[i]['comments'].size === undefined) {
-                   td0(0)
-                    }
-               else{
-                       td0(data[i]['comments'].size)
-                   }
+               td0(data[i]['comments'].length)
            }
 
        } ,
