@@ -65,6 +65,7 @@ public class FeedController {
             String nickName = userService.nickName(user);
             model.addAttribute("user",nickName);
             model.addAttribute("id",userService.id(user));
+            model.addAttribute("userId", user);
             System.out.println(feed);
             model.addAttribute("title",title);
             return "/feed/feedDetail";
@@ -73,19 +74,6 @@ public class FeedController {
         }
     }
 
-//    @PostMapping("/feed/{title}/view")
-//    public Feed view(@CookieValue(value="token", required=false) Cookie cookies,
-//                           @PathVariable(name = "title") String title, Feed list){
-//        try{
-//            System.out.println(title);
-//            list = feedService.feedDetail(title,list);
-//            System.out.println(list);
-//            return list;
-//        }catch (Exception e){
-//            return list;
-//        }
-//
-//    }
 
 
     @PostMapping("/user/feed")
