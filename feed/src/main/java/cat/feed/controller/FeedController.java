@@ -6,6 +6,10 @@ import cat.feed.service.FeedService;
 import cat.feed.service.UserService;
 import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +30,7 @@ public class FeedController {
 
 
     @GetMapping("/feed")
-    public String feed(Model model, @CookieValue(value="token", required=false) Cookie cookie){
-        List<Feed> list = new ArrayList<>();
-        list = feedService.AllFeed();
-        model.addAttribute(list);
-        System.out.println(list);
+    public String feed(Model model, @CookieValue(value="token", required=false) Cookie cookie,Pageable pageable){
         try{
             String token = cookie.getValue();
             String user = jwtTokenProvider.getUserPk(token);
@@ -89,11 +89,13 @@ public class FeedController {
 
     }
 
-    @PostMapping("/allFeed")
+    @GetMapping("/allFeed")
     @ResponseBody
-    public List<Feed> allFeed(){
-        List<Feed> list = new ArrayList<>();
-        list = feedService.AllFeed();
+    public Page<Feed> allFeed(Pageable pageable){
+//        List<Feed> list = new ArrayList<>();
+//        list = feedService.AllFeed(pageable);
+//        PageRequest pageRequest = PageRequest.of(2,2, Sort.Direction.DESC);
+        Page<Feed>  list= feedService.AllFeed(pageable);
         return list;
     }
 

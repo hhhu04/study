@@ -13,7 +13,7 @@
 <form id="loginForm" method="post">
     <p>UserName : <input type="text" id="userId"></p>
     <p>Password &nbsp;: <input type="password" id="password"></p>
-    <p><input type="button" value="로그인" id="add"><input type="button" value="취소" id="back"></p>
+    <p><input type="button" value="로그인" id="add"><input type="button" value="취소" id="back"><input type="button" value="가입" id="join"></p>
 </form>
 <form action="http://localhost:8080/kakao/login" method="get">
     <p><input type="submit" value="카카오로그인" id="kakao"></p>
@@ -24,6 +24,12 @@
 
         $('#back').on('click', function(e) {
             location.href="/";
+        })
+    });
+
+    $(function(){
+        $('#join').on('click', function(e) {
+            location.href="/join";
         })
     });
 </script>

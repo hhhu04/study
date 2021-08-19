@@ -110,13 +110,15 @@ public class UserController {
             cookie.setPath("/");
             cookie.setMaxAge(30*60);
             response.addCookie(cookie);
-            return "<script>alert('로그인');  window.location = 'http://localhost:8080/'</script>";
+//            return "<script>alert('로그인');  window.location = 'http://localhost:8080/'</script>";
+            return "<script>alert('로그인');  window.location = 'http://118.67.133.148:8080/'</script>";
         } else {
             Cookie cookie = new Cookie("email",email);
             cookie.setPath("/");
             cookie.setMaxAge(30*60);
             response.addCookie(cookie);
             return "<script>alert('가입진행. '); window.location = 'http://localhost:8080/kakao/join'</script>";
+//            return "<script>alert('가입진행. '); window.location = 'http://118.67.133.148:8080/kakao/join'</script>";
         }
     }
 

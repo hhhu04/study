@@ -66,9 +66,11 @@ public class BaseController {
             cookie.setMaxAge(0);
             response.addCookie(cookie);
             oauthService.kakaoLogout();
-            return "redirect:http://localhost:8080/";
+//            return "redirect:http://localhost:8080/";
+            return "redirect:http://106.10.36.226:8080/";
         }catch (Exception e){
-            return "redirect:http://localhost:8080/";
+//            return "redirect:http://localhost:8080/";
+            return "redirect:http://106.10.36.226:8080/";
         }
     }
 
