@@ -1,6 +1,8 @@
 package cat.feed.oauth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -13,16 +15,19 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class KakaoOauth  {
     private final String KAKAO_SNS_BASE_URL = "https://kauth.kakao.com/oauth/authorize";
     private final String KAKAO_SNS_CLIENT_ID = "b4dad0c3fd74414e64580f182c1e5df9";
-    private final String KAKAO_SNS_CALLBACK_URL = "http://localhost:8080/kakao/callback";
+
     private final String KAKAO_SNS_TOKEN_BASE_URL = "https://kauth.kakao.com/oauth/token";
     private final String KAKAO_SNS_CLIENT_SECRET = "3r9403RCBoYumFfkKz2JAgASwDdDavyQ";
     private String to;
 
 
-    public String getOauthRedirectURL() {
+    public String getOauthRedirectURL(String host) {
+        String KAKAO_SNS_CALLBACK_URL = "http://"+host+":8080/kakao/callback";
+
         Map<String, Object> params = new HashMap<>();
         params.put("client_id", KAKAO_SNS_CLIENT_ID);
         params.put("redirect_uri", KAKAO_SNS_CALLBACK_URL);
@@ -34,8 +39,9 @@ public class KakaoOauth  {
         return KAKAO_SNS_BASE_URL + "?" + parameterString;
     }
 
-    public String requestAccessToken(String code) {
+    public String requestAccessToken(String code,String host) {
         RestTemplate restTemplate = new RestTemplate();
+        String KAKAO_SNS_CALLBACK_URL = "http://"+host+":8080/kakao/callback";
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");

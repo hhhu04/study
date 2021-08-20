@@ -4,6 +4,7 @@ import cat.feed.jwt.JwtTokenProvider;
 import cat.feed.service.OauthService;
 import cat.feed.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,8 @@ public class BaseController {
     private final JwtTokenProvider jwtTokenProvider;
     private final OauthService oauthService;
     private final UserService userService;
+    @Value("${test.url}")
+    private  String url;
 
     @GetMapping("/")
     public String main(Model model,@CookieValue(value="token", required=false) Cookie cookie){
@@ -29,6 +32,7 @@ public class BaseController {
             String user = jwtTokenProvider.getUserPk(token);
             String nickName = userService.nickName(user);
             model.addAttribute("user",nickName+"님 환영합니다.");
+            System.out.println(url);
             return "main";
         }catch (Exception e){
             model.addAttribute("user","게스트");
@@ -66,11 +70,9 @@ public class BaseController {
             cookie.setMaxAge(0);
             response.addCookie(cookie);
             oauthService.kakaoLogout();
-//            return "redirect:http://localhost:8080/";
-            return "redirect:http://106.10.36.226:8080/";
+            return "redirect:http://"+url+":8080/";
         }catch (Exception e){
-//            return "redirect:http://localhost:8080/";
-            return "redirect:http://106.10.36.226:8080/";
+            return "redirect:http://"+url+":8080/";
         }
     }
 
