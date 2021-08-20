@@ -4,15 +4,15 @@ import cat.feed.entity.Feed;
 import cat.feed.jwt.JwtTokenProvider;
 import cat.feed.service.FeedService;
 import cat.feed.service.UserService;
-import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,32 +21,29 @@ public class FeedController {
     private final FeedService feedService;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserService userService;
+    @Value("${test.url}")
+    private  String url;
 
     @GetMapping("favicon.ico") @ResponseBody public void returnNoFavicon() { }
 
 
     @GetMapping("/feed")
-    public String feed(Model model, @CookieValue(value="token", required=false) Cookie cookie){
-        List<Feed> list = new ArrayList<>();
-        list = feedService.AllFeed();
-        model.addAttribute(list);
-        System.out.println(list);
+    public String feed(Model model, @CookieValue(value="token", required=false) Cookie cookie,Pageable pageable){
         try{
             String token = cookie.getValue();
             String user = jwtTokenProvider.getUserPk(token);
             String nickName = userService.nickName(user);
-                return "/feed/feed";
             }catch (Exception e){
             model.addAttribute("user","게스트");
-            return "/feed/feed";
         }
+        return "feed";
     }
 
     @GetMapping("/feed/new")
     public String newFeed(@CookieValue(value="token", required=false) Cookie cookies){
         try {
             String id = cookies.getValue();
-            return "/feed/newFeed";
+            return "newFeed";
         }catch (Exception e){
             return "login";
         }
@@ -68,7 +65,7 @@ public class FeedController {
             model.addAttribute("userId", user);
             System.out.println(feed);
             model.addAttribute("title",title);
-            return "/feed/feedDetail";
+            return "feedDetail";
         }catch (Exception e){
             return "login";
         }
@@ -89,11 +86,13 @@ public class FeedController {
 
     }
 
-    @PostMapping("/allFeed")
+    @GetMapping("/allFeed")
     @ResponseBody
-    public List<Feed> allFeed(){
-        List<Feed> list = new ArrayList<>();
-        list = feedService.AllFeed();
+    public Page<Feed> allFeed(Pageable pageable){
+//        List<Feed> list = new ArrayList<>();
+//        list = feedService.AllFeed(pageable);
+//        PageRequest pageRequest = PageRequest.of(2,2, Sort.Direction.DESC);
+        Page<Feed>  list= feedService.AllFeed(pageable);
         return list;
     }
 

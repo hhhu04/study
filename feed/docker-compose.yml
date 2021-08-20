@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  database:
+    image: mysql:5.7
+    environment:
+      MYSQL_USER: sample
+      MYSQL_DATABASE: feed
+      MYSQL_PASSWORD: 12345678
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+    volumes:
+      - "./database/feed/:/var/lib/mysql"
+
+
+    ports:
+      - "3306:3306"
+    container_name: feed
+    networks:
+      - backend-network
+
+  jdk:
+    image: openjdk:11-jdk

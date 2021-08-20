@@ -16,10 +16,10 @@ public class OauthService {
     private final KakaoOauth kakaoOauth;
     private final KakaoOauth googleOauth;
 
-    public void request(String socialLoginType) {
+    public void request(String socialLoginType,String url) {
         String redirectURL;
-        if (socialLoginType.equals("google")) redirectURL = googleOauth.getOauthRedirectURL();
-        else redirectURL = kakaoOauth.getOauthRedirectURL();
+        if (socialLoginType.equals("google")) redirectURL = googleOauth.getOauthRedirectURL(url);
+        else redirectURL = kakaoOauth.getOauthRedirectURL(url);
         try {
             response.sendRedirect(redirectURL);
         } catch (IOException e) {
@@ -27,11 +27,11 @@ public class OauthService {
         }
     }
 
-    public String requestAccessToken(String socialLoginType, String code) {
+    public String requestAccessToken(String socialLoginType, String code,String url) {
 
-        if (socialLoginType.equals("google")) return googleOauth.requestAccessToken(code);
+        if (socialLoginType.equals("google")) return googleOauth.requestAccessToken(code,url);
         else {
-            return kakaoOauth.requestAccessToken(code);
+            return kakaoOauth.requestAccessToken(code,url);
         }
     }
 

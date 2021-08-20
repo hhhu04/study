@@ -5,6 +5,7 @@ import cat.feed.service.OauthService;
 import cat.feed.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,8 @@ public class UserController {
 
     private final UserService userService;
     private final OauthService oauthService;
+    @Value("${test.url}")
+    private  String url;
 
     // 1:성공 -1:아디중복 -2:아디없음 -3그 밖의 에러
 
@@ -94,7 +97,7 @@ public class UserController {
     public void socialLoginType(
             @PathVariable(name = "socialLoginType") String socialLoginType) {
         System.out.println(">> 사용자로부터 SNS 로그인 요청을 받음 :: {} Social Login"+socialLoginType);
-        oauthService.request(socialLoginType);
+        oauthService.request(socialLoginType,url);
     }
 
     @GetMapping(value = "/{socialLoginType}/callback")
@@ -102,7 +105,7 @@ public class UserController {
             @PathVariable(name = "socialLoginType") String socialLoginType,
             @RequestParam(name = "code") String code, HttpServletResponse response,HttpServletRequest request) {
         System.out.println(">> 소셜 로그인 API 서버로부터 받은 code :: {}" + code);
-        String email = oauthService.requestAccessToken(socialLoginType, code);
+        String email = oauthService.requestAccessToken(socialLoginType, code,url);
 
         if (userService.check(email, socialLoginType)) {
             String token = userService.login(email, socialLoginType);
@@ -110,13 +113,17 @@ public class UserController {
             cookie.setPath("/");
             cookie.setMaxAge(30*60);
             response.addCookie(cookie);
-            return "<script>alert('로그인');  window.location = 'http://localhost:8080/'</script>";
+//            return "<script>alert('로그인');  window.location = 'http://localhost:8080/'</script>";
+//            return "<script>alert('로그인');  window.location = 'http://118.67.133.148:8080/'</script>";
+            return "<script>alert('로그인');  window.location = 'http://"+url+":8080/'</script>";
         } else {
             Cookie cookie = new Cookie("email",email);
             cookie.setPath("/");
             cookie.setMaxAge(30*60);
             response.addCookie(cookie);
-            return "<script>alert('가입진행. '); window.location = 'http://localhost:8080/kakao/join'</script>";
+//            return "<script>alert('가입진행. '); window.location = 'http://localhost:8080/kakao/join'</script>";
+//            return "<script>alert('가입진행. '); window.location = 'http://118.67.133.148:8080/kakao/join'</script>";
+            return "<script>alert('가입진행. '); window.location = 'http://"+url+":8080/kakao/join'</script>";
         }
     }
 

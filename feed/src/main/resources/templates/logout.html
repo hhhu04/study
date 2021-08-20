@@ -3,10 +3,12 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/miniCss.css">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div class="base">
 <h2>로그아웃 페이지</h2>
 <form id="logoutForm" method="post">
     <p><input type="button" value="로그아웃" id="add"><input type="button" value="취소" id="back"></p>
@@ -14,7 +16,7 @@
 <form id="kaForm" action="http://localhost:8080/out/kakao" method="get">
     <input type="submit" value="카카오계정 로그아웃" id="add2">
 </form>
-
+</div>
 <script>
     jQuery('#kaForm').submit(
         function (){
